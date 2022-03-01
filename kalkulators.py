@@ -2,34 +2,42 @@ from argparse import MetavarTypeHelpFormatter
 from distutils import command
 from tkinter import*
 from tokenize import Number
+#import math
+from math import*
+
+
 mansLogs=Tk()
 mansLogs.title('Kalkulators')
 #mansLogs.geometry('300x300')
 #poga=Button(mansLogs,text='Labdien!',bg='purple',fg='pink')
 #poga.pack()
 
-e=Entry(mansLogs,width=15,font=("Arial Black",20))
+e=Entry(mansLogs,width=15,bd=30,bg="gray",font=("Arial Black",20))
 e.grid(row=0,column=0,columnspan=4)
 
-btnclear=Button(mansLogs,text='C',padx='120',pady='20', command=lambda:clear())
+btnclear=Button(mansLogs,text='C',padx='155',pady='20',bd=10,bg="orange", command=lambda:clear())
 btnclear.grid(row=1,column=0,columnspan=3)
 
-btn0=Button(mansLogs,text='0',padx='80',pady='20',command=lambda:btnClick(0))
-btn1=Button(mansLogs,text='1',padx='40',pady='20',command=lambda:btnClick(1))
-btn2=Button(mansLogs,text='2',padx='40',pady='20',command=lambda:btnClick(2))
-btn3=Button(mansLogs,text='3',padx='40',pady='20',command=lambda:btnClick(3))
-btn4=Button(mansLogs,text='4',padx='40',pady='20',command=lambda:btnClick(4))
-btn5=Button(mansLogs,text='5',padx='40',pady='20',command=lambda:btnClick(5))
-btn6=Button(mansLogs,text='6',padx='40',pady='20',command=lambda:btnClick(6))
-btn7=Button(mansLogs,text='7',padx='40',pady='20',command=lambda:btnClick(7))
-btn8=Button(mansLogs,text='8',padx='40',pady='20',command=lambda:btnClick(8))
-btn9=Button(mansLogs,text='9',padx='40',pady='20',command=lambda:btnClick(9))
-btnminus=Button(mansLogs,text='-',padx='40',pady='20',command=lambda:btnCommand("-"))
-btnplus=Button(mansLogs,text='+',padx='40',pady='20',command=lambda:btnCommand("+"))
-btndivide=Button(mansLogs,text='/',padx='40',pady='20',command=lambda:btnCommand("/"))
-btnmultiply=Button(mansLogs,text='x',padx='40',pady='20',command=lambda:btnCommand("*"))
-btnpoint=Button(mansLogs,text='.',padx='40',pady='20')
-btnequal=Button(mansLogs,text='=',padx='40',pady='20',command=lambda:Equals())
+btn0=Button(mansLogs,text='0',padx='100',pady='20',bd=10,bg="orange",command=lambda:btnClick(0))
+btn1=Button(mansLogs,text='1',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(1))
+btn2=Button(mansLogs,text='2',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(2))
+btn3=Button(mansLogs,text='3',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(3))
+btn4=Button(mansLogs,text='4',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(4))
+btn5=Button(mansLogs,text='5',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(5))
+btn6=Button(mansLogs,text='6',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(6))
+btn7=Button(mansLogs,text='7',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(7))
+btn8=Button(mansLogs,text='8',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(8))
+btn9=Button(mansLogs,text='9',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnClick(9))
+btnminus=Button(mansLogs,text='-',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnCommand("-"))
+btnplus=Button(mansLogs,text='+',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnCommand("+"))
+btndivide=Button(mansLogs,text='/',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnCommand("/"))
+btnmultiply=Button(mansLogs,text='x',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnCommand("*"))
+btnpoint=Button(mansLogs,text='.',padx='40',pady='20',bd=10,bg="orange")
+btnequal=Button(mansLogs,text='=',padx='40',pady='20',bd=10,bg="orange",command=lambda:Equals())
+btnsqr=btnmultiply=Button(mansLogs,text='sqrt',padx='40',pady='20',bd=10,bg="orange",command=lambda:sqrt())
+btnpow=btnmultiply=Button(mansLogs,text='^',padx='40',pady='20',bd=10,bg="orange",command=lambda:btnCommand("^"))
+btnlog=btnmultiply=Button(mansLogs,text='log(10)',padx='40',pady='20',bd=10,bg="orange",command=lambda:logg())
+
 
 
 btn7.grid(row=2,column=0)
@@ -52,9 +60,34 @@ btn0.grid(row=5,column=0,columnspan=2)
 btnequal.grid(row=5,column=3)
 btnplus.grid(row=4,column=3)
 
+btnsqr.grid(row=6,column=0)
+btnpow.grid(row=6,column=1)
+btnlog.grid(row=6,column=2)
 
 
+def sqrt():
+  num1=int(e.get())
+  result=0
+  result=num1**0.5
+  e.delete(0,END)
+  e.insert(0,str(result))
+  return 0
 
+def logg():
+  num1=int(e.get())
+  result=0
+  result= log(num1,10)
+  e.delete(0,END)
+  e.insert(0,str(result))
+  return 0
+
+def sqrt():
+  num1=int(e.get())
+  result=0
+  result=num1**0.5
+  e.delete(0,END)
+  e.insert(0,str(result))
+  return 0
 
 def btnClick(number):
   current=e.get() #nolasa esošo skaitli
@@ -84,6 +117,9 @@ def Equals():
         result=num1/num2
     elif mathOp=="*":
         result=num1*num2
+    elif mathOp=="^":
+        result=num1**num2
+    
     else:
         result=0
     e.delete(0,END)
